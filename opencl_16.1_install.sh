@@ -16,6 +16,7 @@ tar xvf opencl_runtime_16.1_x64_ubuntu_5.2.0.10002.tgz
 #unpack the rpms
 #according to http://mhr3.blogspot.com/2013/06/opencl-on-ubuntu-1304.html, we don't need all of them unpacked
 #basically, just the ICD itself
+sudo apt-get install -y rpm2cpio
 rpm2cpio opencl_runtime_16.1_x64_ubuntu_5.2.0.10002/rpm/opencl-1.2-intel-cpu-5.2.0.10002-1.x86_64.rpm | cpio -idmv
 
 #stub out the directory structure for the deb package as a staging area
@@ -64,6 +65,7 @@ dpkg-deb --build opencl-driver-intel-cpu
 sudo dpkg --install opencl-driver-intel-cpu.deb
 sudo apt-get install -f
 sudo ldconfig
+sudo apt-get install -y clinfo
 clinfo #this verifies it installed correctly
 #cleanup
 rm -rf opencl-driver-intel-cpu opencl_runtime_16.1_x64_ubuntu_5.2.0.10002*
